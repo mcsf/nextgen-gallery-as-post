@@ -105,17 +105,16 @@ function nggap_delete_gallery( $gid ) {
 
 add_filter( 'get_edit_post_link', 'nggap_edit_post_link' );
 function nggap_edit_post_link( $url ) {
-	$pattern = '@^(http.*/wp-admin/)post.php\?post=([0-9]+)@';
+	$pattern = '@/wp-admin/post.php\?post=([0-9]+)@';
 
 	if ( ! preg_match( $pattern, $url, $matches ) )
 		return $url;
 
-	$base = $matches[1];
-	$id = $matches[2];
+	$id = $matches[1];
 
 	if ( get_post_type( $id ) == 'nggap_gallery' ) {
 		$gid = get_post_meta( $id, 'nggap_gid', true );
-		$url = $base . "admin.php?page=nggallery-manage-gallery&mode=edit&gid={$gid}";
+		$url = admin_url( "admin.php?page=nggallery-manage-gallery&mode=edit&gid={$gid}" );
 	}
 
 	return $url;
