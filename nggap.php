@@ -107,6 +107,8 @@ function nggap_delete_gallery( $gid ) {
 
 add_filter( 'get_edit_post_link', 'nggap_edit_post_link' );
 function nggap_edit_post_link( $url ) {
+	if ( DEBUG && is_admin() ) return $url;
+
 	$pattern = '@/wp-admin/post.php\?post=([0-9]+)@';
 
 	if ( ! preg_match( $pattern, $url, $matches ) )
