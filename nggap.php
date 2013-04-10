@@ -46,6 +46,7 @@ function nggap_register_type() {
 			'has_archive' => true,
 			'exclude_from_search' => false,
 			'rewrite' => array( 'slug' => $slug ),
+			'taxonomies' => array( 'post_tag' ),
 		)
 	);
 }
@@ -53,7 +54,11 @@ function nggap_register_type() {
 
 add_filter( 'pre_get_posts' , 'nggap_show_type', $priority );
 function nggap_show_type( $query ) {
-	if ( $query->is_main_query() && ( is_category() || is_home() || is_search() ) ) {
+	if ( $query->is_main_query() && (
+			is_category()
+			|| is_home()
+			|| is_search()
+			|| is_tag() ) ) {
 		$types = $query->get( 'post_type' );
 		$types[] = 'nggap_gallery';
 		$query->set( 'post_type', $types );
