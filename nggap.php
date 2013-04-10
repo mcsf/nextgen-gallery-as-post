@@ -36,6 +36,7 @@ $priority = NGGCF_PRIORITY + 1;
 
 add_action( 'init', 'nggap_register_type' );
 function nggap_register_type() {
+	$slug = apply_filters( 'nggap_type_rewrite', 'nggap_gallery' );
 	register_post_type( 'nggap_gallery', array(
 			'labels' => array(
 				'name' => '[hidden] NGGAP Proxy Posts',
@@ -44,6 +45,7 @@ function nggap_register_type() {
 			'show_ui' => DEBUG,
 			'has_archive' => true,
 			'exclude_from_search' => false,
+			'rewrite' => array( 'slug' => $slug ),
 		)
 	);
 }
