@@ -88,6 +88,12 @@ add_action( 'ngg_update_gallery', 'nggap_update_gallery', $priority, 2 );
 function nggap_update_gallery( $gid, $postdata ) {
 	$post = nggap_get_related_post( $gid );
 
+	if ( ! $post ) {
+		$id = nggap_create_gallery( $gid );
+		if ( empty( $id ) ) return;
+		$post = wp_get_single_post( $id );
+	}
+
 	$post->post_title = esc_attr( $postdata['title'] );
 	$post->post_content = esc_attr( $postdata['gallerydesc'] );
 	$post->post_author = (int) $postdata['author'];
