@@ -46,7 +46,7 @@ function nggap_register_type() {
 			'has_archive' => true,
 			'exclude_from_search' => false,
 			'rewrite' => array( 'slug' => $slug ),
-			'taxonomies' => array( 'post_tag' ),
+			'taxonomies' => array( 'post_tag', 'category' ),
 		)
 	);
 }
